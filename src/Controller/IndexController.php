@@ -11,6 +11,9 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class IndexController extends AbstractController
 {
     #[Route('/emploi', name: 'index')]
+    /**
+     * @Route("/emploi", name="index")
+     */
     public function index(UserPasswordEncoderInterface $encoder): Response
     {
         return $this->render('index/index.html.twig', [

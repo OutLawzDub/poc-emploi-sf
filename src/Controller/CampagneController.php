@@ -10,10 +10,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/campagne')]
+/**
+ * @Route("/admin/campagne")
+ */
 class CampagneController extends AbstractController
 {
-    #[Route('/', name: 'campagne_index', methods: ['GET'])]
+    /**
+     * @Route("/", name="campagne_index", methods={"GET"})
+     */
     public function index(CampagneRepository $campagneRepository): Response
     {
         return $this->render('campagne/index.html.twig', [
@@ -21,7 +25,9 @@ class CampagneController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'campagne_new', methods: ['GET', 'POST'])]
+    /**
+     * @Route("/new", name="campagne_new", methods={"GET", "POST"})
+     */
     public function new(Request $request): Response
     {
         $campagne = new Campagne();
@@ -42,7 +48,9 @@ class CampagneController extends AbstractController
         ]);
     }
 
-    #[Route('/{slug}', name: 'campagne_show', methods: ['GET'])]
+    /**
+     * @Route("/{slug}", name="campagne_show", methods={"GET"})
+     */
     public function show(Campagne $campagne): Response
     {
         return $this->render('campagne/show.html.twig', [
@@ -50,7 +58,9 @@ class CampagneController extends AbstractController
         ]);
     }
 
-    #[Route('/{slug}/edit', name: 'campagne_edit', methods: ['GET', 'POST'])]
+    /**
+     * @Route("/{slug}/edit", name="campagne_edit", methods={"GET", "POST"})
+     */
     public function edit(Request $request, Campagne $campagne): Response
     {
         $form = $this->createForm(CampagneType::class, $campagne);
@@ -68,7 +78,9 @@ class CampagneController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'campagne_delete', methods: ['DELETE'])]
+    /**
+     * @Route("/{id}", name="campagne_delete", methods={"DELETE"})
+     */
     public function delete(Request $request, Campagne $campagne): Response
     {
         if ($this->isCsrfTokenValid('delete'.$campagne->getId(), $request->request->get('_token'))) {

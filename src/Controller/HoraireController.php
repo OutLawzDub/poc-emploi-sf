@@ -10,10 +10,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/horaire')]
+/**
+ * @Route("/admin/horaire")
+ */
 class HoraireController extends AbstractController
 {
-    #[Route('/', name: 'horaire_index', methods: ['GET'])]
+    /**
+     * @Route("/", name="horaire_index", methods={"GET"})
+     */
     public function index(HoraireRepository $horaireRepository): Response
     {
         return $this->render('horaire/index.html.twig', [
@@ -21,7 +25,9 @@ class HoraireController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'horaire_new', methods: ['GET', 'POST'])]
+    /**
+     * @Route("/new", name="horaire_new", methods={"GET", "POST"})
+     */
     public function new(Request $request): Response
     {
         $horaire = new Horaire();
@@ -42,7 +48,9 @@ class HoraireController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'horaire_show', methods: ['GET'])]
+    /**
+     * @Route("/{id}", name="horaire_show", methods={"GET"})
+     */
     public function show(Horaire $horaire): Response
     {
         return $this->render('horaire/show.html.twig', [
@@ -50,7 +58,9 @@ class HoraireController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'horaire_edit', methods: ['GET', 'POST'])]
+    /**
+     * @Route("/{id}/edit", name="horaire_edit", methods={"GET", "POST"})
+     */
     public function edit(Request $request, Horaire $horaire): Response
     {
         $form = $this->createForm(HoraireType::class, $horaire);
@@ -68,7 +78,9 @@ class HoraireController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'horaire_delete', methods: ['DELETE'])]
+    /**
+     * @Route("/{id}", name="horaire_delete", methods={"DELETE"})
+     */
     public function delete(Request $request, Horaire $horaire): Response
     {
         if ($this->isCsrfTokenValid('delete'.$horaire->getId(), $request->request->get('_token'))) {

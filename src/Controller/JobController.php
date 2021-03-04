@@ -10,10 +10,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/job')]
+/**
+ * @Route("/admin/job")
+ */
 class JobController extends AbstractController
 {
-    #[Route('/', name: 'job_index', methods: ['GET'])]
+    /**
+     * @Route("/", name="job_index", methods={"GET"})
+     */
     public function index(JobRepository $jobRepository): Response
     {
         return $this->render('job/index.html.twig', [
@@ -21,7 +25,9 @@ class JobController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'job_new', methods: ['GET', 'POST'])]
+    /**
+     * @Route("/new", name="job_new", methods={"GET", "POST"})
+     */
     public function new(Request $request): Response
     {
         $job = new Job();
@@ -42,7 +48,9 @@ class JobController extends AbstractController
         ]);
     }
 
-    #[Route('/{slug}', name: 'job_show', methods: ['GET'])]
+    /**
+     * @Route("/{slug}", name="job_show", methods={"GET"})
+     */
     public function show(Job $job): Response
     {
         return $this->render('job/show.html.twig', [
@@ -50,7 +58,9 @@ class JobController extends AbstractController
         ]);
     }
 
-    #[Route('/{slug}/edit', name: 'job_edit', methods: ['GET', 'POST'])]
+    /**
+     * @Route("/{slug}/edit", name="job_edit", methods={"GET", "POST"})
+     */
     public function edit(Request $request, Job $job): Response
     {
         $form = $this->createForm(JobType::class, $job);
@@ -68,7 +78,9 @@ class JobController extends AbstractController
         ]);
     }
 
-    #[Route('/{slug}', name: 'job_delete', methods: ['DELETE'])]
+    /**
+     * @Route("/{slug}", name="job_delete", methods={"DELETE"})
+     */
     public function delete(Request $request, Job $job): Response
     {
         if ($this->isCsrfTokenValid('delete'.$job->getId(), $request->request->get('_token'))) {
