@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste Campagnes{% endblock %}
+
+{% block body %}
+    <br>
+    <h1>Liste des campagnes</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom_campagne</th>
+                <th>Date_start</th>
+                <th>Date_end</th>
+                <th>Créateur</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for campagne in campagnes %}
+            <tr>
+                <td>{{ campagne.id }}</td>
+                <td>{{ campagne.nomCampagne }}</td>
+                <td>{{ campagne.dateStart ? campagne.dateStart|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ campagne.dateEnd ? campagne.dateEnd|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('user_show', {'id': campagne.creator.id}) }}">{{ campagne.creator.email|split('@')[0] }}</a>
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-info" href="{{ path('campagne_show', {'slug': campagne.slug}) }}">
+                        <i class="fas fa-eye"></i>
+                        Voir
+                    </a>
+                    <a class="btn btn-sm btn-success" href="{{ path('campagne_edit', {'slug': campagne.slug}) }}">
+                        <i class="fas fa-edit"></i>
+                        Editer
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Aucune campagne pour le moment</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('campagne_new') }}">
+        <i class="fas fa-plus"></i>
+        Nouvelle Campagne
+    </a>
+{% endblock %}

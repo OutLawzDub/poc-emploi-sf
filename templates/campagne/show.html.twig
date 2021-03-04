@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Campagne{% endblock %}
+
+{% block body %}
+    <br>
+    <h1>Campagne</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ campagne.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom_campagne</th>
+                <td>{{ campagne.nomCampagne }}</td>
+            </tr>
+            <tr>
+                <th>Date_start</th>
+                <td>{{ campagne.dateStart ? campagne.dateStart|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date_end</th>
+                <td>{{ campagne.dateEnd ? campagne.dateEnd|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Créateur</th>
+                <td>
+                    <a href="{{ path('user_show', {'id': campagne.creator.id}) }}">{{ campagne.creator.email|split('@')[0] }}</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-sm btn-info" href="{{ path('campagne_index') }}">
+        <i class="fas fa-arrow-left"></i>
+        Retour à la liste
+    </a>
+
+    <a class="btn btn-sm btn-success" href="{{ path('campagne_edit', {'slug': campagne.slug}) }}">
+        <i class="fas fa-edit"></i>
+        Editer
+    </a>
+
+    {{ include('campagne/_delete_form.html.twig') }}
+{% endblock %}

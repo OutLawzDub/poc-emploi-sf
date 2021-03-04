@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Job{% endblock %}
+
+{% block body %}
+    <br>
+    <h1>Job</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ job.id }}</td>
+            </tr>
+            <tr>
+                <th>Job</th>
+                <td>{{ job.job }}</td>
+            </tr>
+            <tr>
+                <th>Lien</th>
+                <td>{{ job.lien }}</td>
+            </tr>
+            <tr>
+                <th>Id Rom</th>
+                <td>{{ job.getIdRom }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-sm btn-info" href="{{ path('job_index') }}">
+        <i class="fas fa-arrow-left"></i>
+        Retour à la liste
+    </a>
+
+    <a class="btn btn-sm btn-success" href="{{ path('job_edit', {'slug': job.slug}) }}">
+        <i class="fas fa-edit"></i>
+        Editer
+    </a>
+
+    {{ include('job/_delete_form.html.twig') }}
+{% endblock %}

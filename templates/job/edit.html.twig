@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editer un job{% endblock %}
+
+{% block body %}
+    <br>
+    <h1>Editer un job</h1>
+
+    {{ include('job/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+    {{ include('job/_delete_form.html.twig') }}
+
+    <br>
+
+    <a class="btn btn-sm btn-info" href="{{ path('job_index') }}">
+        <i class="fas fa-arrow-left"></i>
+        Retour à la liste
+    </a>
+{% endblock %}

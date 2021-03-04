@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des jobs{% endblock %}
+
+{% block body %}
+    <br>
+    <h1>Liste des jobs</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Job</th>
+                <th>Lien</th>
+                <th>Id Rom</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for job in jobs %}
+            <tr>
+                <td>{{ job.id }}</td>
+                <td>{{ job.job }}</td>
+                <td>{{ job.lien }}</td>
+                <td>{{ job.getIdRom }}</td>
+                <td>
+                    <a class="btn btn-sm btn-info" href="{{ path('job_show', {'slug': job.slug}) }}">
+                        <i class="fas fa-eye"></i>
+                        Voir
+                    </a>
+                    <a class="btn btn-sm btn-success" href="{{ path('job_edit', {'slug': job.slug}) }}">
+                        <i class="fas fa-edit"></i>
+                        Editer
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucun résultats.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('job_new') }}">
+        <i class="fas fa-plus"></i>
+        Nouveau job
+    </a>
+{% endblock %}

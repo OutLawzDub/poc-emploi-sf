@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editer un horaire{% endblock %}
+
+{% block body %}
+    <br>
+    <h1>Editer un horaire</h1>
+
+    {{ include('horaire/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+    {{ include('horaire/_delete_form.html.twig') }}
+
+    <br>
+
+    <a class="btn btn-sm btn-info" href="{{ path('horaire_index') }}">
+        <i class="fas fa-arrow-left"></i>
+        Retour à la liste
+    </a>
+{% endblock %}

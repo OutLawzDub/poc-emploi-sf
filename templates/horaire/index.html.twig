@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des horaires{% endblock %}
+
+{% block body %}
+    <br>
+    <h1>Liste des horaires</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date_start</th>
+                <th>Date_end</th>
+                <th>Campagne</th>
+                <th>Job</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for horaire in horaires %}
+
+            <tr>
+                <td>{{ horaire.id }}</td>
+                <td>{{ horaire.dateStart ? horaire.dateStart|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ horaire.dateEnd ? horaire.dateEnd|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('campagne_show', {'slug': horaire.campagne.slug}) }}">{{ horaire.campagne.getNomCampagne }}</a>
+                </td>
+                <td>
+                    <a href="{{ path('job_show', {'slug': horaire.job.slug}) }}">{{ horaire.job.job }}</a>
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-info" href="{{ path('horaire_show', {'id': horaire.id}) }}">
+                        <i class="fas fa-eye"></i>
+                        Voir
+                    </a>
+                    <a class="btn btn-sm btn-success" href="{{ path('horaire_edit', {'id': horaire.id}) }}">
+                        <i class="fas fa-edit"></i>
+                        Editer
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucun résultats.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('horaire_new') }}">
+        <i class="fas fa-plus"></i>
+        Nouvel Horaire
+    </a>
+{% endblock %}

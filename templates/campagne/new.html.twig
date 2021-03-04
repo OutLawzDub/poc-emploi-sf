@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle Campagne{% endblock %}
+
+{% block body %}
+    <br>
+    <h1>Créer une nouvelle campagne</h1>
+
+    {{ include('campagne/_form.html.twig') }}
+
+    <br>
+    <a class="btn btn-sm btn-info" href="{{ path('campagne_index') }}">
+        <i class="fas fa-arrow-left"></i>
+        Retour à la liste
+    </a>
+{% endblock %}

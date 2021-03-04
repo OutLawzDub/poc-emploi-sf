@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Horaire{% endblock %}
+
+{% block body %}
+    <br>
+    <h1>Horaire</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ horaire.id }}</td>
+            </tr>
+            <tr>
+                <th>Date_start</th>
+                <td>{{ horaire.dateStart ? horaire.dateStart|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date_end</th>
+                <td>{{ horaire.dateEnd ? horaire.dateEnd|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Campagne</th>
+                <td>
+                    <a href="{{ path('campagne_show', {'slug': horaire.campagne.slug}) }}">{{ horaire.campagne.getNomCampagne }}</a>
+                </td>
+            </tr>
+            <tr>
+                <th>Job</th>
+                <td>
+                    <a href="{{ path('job_show', {'slug': horaire.job.slug}) }}">{{ horaire.job.job }}</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <a class="btn btn-sm btn-info" href="{{ path('horaire_index') }}">
+        <i class="fas fa-arrow-left"></i>
+        Retour à la liste
+    </a>
+
+    <a class="btn btn-sm btn-success" href="{{ path('horaire_edit', {'id': horaire.id}) }}">
+        <i class="fas fa-edit"></i>
+        Editer
+    </a>
+
+    {{ include('horaire/_delete_form.html.twig') }}
+{% endblock %}
